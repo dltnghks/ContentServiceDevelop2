@@ -12,23 +12,24 @@
         <div class = "header">
             <h2 id = "small_title" onClick = "location.href='pyony.html'">편띵</h2>
             <div class = "pyony_gather">
-                <h3 class = "header_element" id = "CU">CU</h3>
-                <h3 class = "header_element" id = "GS25">GS25</h3>
-                <h3 class = "header_element" id = "seven-ELEVEn">7-ELEVEn</h3>
-                <h3 class = "header_element" id = "MINISTOP">MINISTOP</h3>
-                <h3 class = "header_element" id = "emart24">emart24</h3>
+                <h3 class = "header_element" onClick = "location.href='CU_search.php'" id = "CU">CU</h3>
+            <h3 class = "header_element" onClick = "location.href='GS_search.php'" id = "GS25">GS25</h3>
+            <h3 class = "header_element" onClick = "location.href='Seven_search.php'" id = "seven-ELEVEn">7-ELEVEn</h3>
+            <h3 class = "header_element" onClick = "location.href='Ministop_search.php'" id = "MINISTOP">MINISTOP</h3>
+            <h3 class = "header_element" onClick = "location.href='Emart24_search.php'" id = "emart24">emart24</h3>
+
             </div>
             <div></div>
         </div>
+
+	<!-- 로그인 하는 곳 -->
         <div class = "login_form">
-            <form>
+            <form action = "login.php" method="post">
                 <input type = "text" name = "id" class = "login_element" placeholder="아이디">
                 <input type = "password" name = "password" class = "login_element" placeholder="비밀번호">
                 <input type = "submit" value = "로그인" class = "login_btn">
                 <input type = "button" value = "회원가입" class = "join_btn" onClick = "location.href ='join_the_membership.html'">
             </form>
-
-
             <div class="links">
                 <a href="#">비밀번호를 잊어버리셨나요?</a>
             </div>

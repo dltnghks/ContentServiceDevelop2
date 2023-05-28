@@ -23,8 +23,10 @@
     <h1>편   띵</h1>
 
     <div class = "input-group">
-        <input type = "text" name = "name" placeholder="상품명 검색" class = "search">
-        <button id = "submit">검색</button>
+	    <form action = "Main_search.php" method = "get">
+		    <input type = "text" name = "search" placeholder="상품명 검색" class = "search" required = "required"/>
+		    <button id = "submit">검색</button>
+	    </form>
     </div>
 
 
