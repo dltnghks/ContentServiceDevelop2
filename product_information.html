@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>편 띵</title>
+    <link rel="stylesheet" href="p_informationstyle.css">
+
+
+
+
+
+
+    
+
+
+
+
+
+</head>
+<body>
+    <div class = "header">
+        <h2 id = "small_title" onClick = "location.href='pyony.html'">편띵</h2>
+        <div class = "pyony_gather">
+            <h3 class = "header_element" id = "CU">CU</h3>
+            <h3 class = "header_element" id = "GS25">GS25</h3>
+            <h3 class = "header_element" id = "seven-ELEVEn">7-ELEVEn</h3>
+            <h3 class = "header_element" id = "MINISTOP">MINISTOP</h3>
+            <h3 class = "header_element" id = "emart24">emart24</h3>
+        </div>
+        <button class = "button_login" onClick = "location.href ='pyony_login.html'">로그인</button>
+    </div>
+
+    <div class = "p_comment">
+        <div class = "CU_product">
+            <h2>CU 할인 상품</h2>
+            <div class = "CU_gather">
+                <div class = "menu_cu">
+                    <small class ="cu_pn_name">CU
+                        <span class = "Product_name">과자</span>
+                    </small>
+                    <div class = "menu_cu2">
+                        <div class ="pn_img"></div>
+                        <div class ="pn_information"></div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        <div class = "comment">
+            <h2>댓글</h2>
+            <div class = "User_comment_gather">
+                <div class = "user_comment">
+                    <div class = "user">
+                        <small class="comment_pn_name">CU
+                            <span class = "name_date">회원 이름 / 작성 일자</span>
+                        </small>
+                    </div>
+                    <div class = "comment_detail">댓글 내용</div>
+                </div>
+                <div class = "user_comment">
+                    <div class = "user">
+                        <small class="comment_pn_name">CU
+                            <span class = "name_date">회원 이름 / 작성 일자</span>
+                        </small>
+                    </div>
+                    <div class = "comment_detail">댓글 내용</div>
+                </div>
+                <div class = "user_comment">
+                    <div class = "user">
+                        <small class="comment_pn_name">CU
+                            <span class = "name_date">회원 이름 / 작성 일자</span>
+                        </small>
+                    </div>
+                    <div class = "comment_detail">댓글 내용</div>
+                </div>
+                <div class = "user_comment">
+                    <div class = "user">
+                        <small class="comment_pn_name">CU
+                            <span class = "name_date">회원 이름 / 작성 일자</span>
+                        </small>
+                    </div>
+                    <div class = "comment_detail">댓글 내용</div>
+                </div>
+            </div>
+            <div class = "comment_write">
+                <input type = "text" class ="write" placeholder = "댓글을 입력해주세요.">
+                <input type = "button" class = "write_btn" value = "작성" style = "right : 50">
+            </div>
+        </div>
+    </div>
+
+    <div id="disqus_thread"></div>
+    <script>
+        /**
+        *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+        *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+        /*
+        var disqus_config = function () {
+        this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        };
+        */
+        (function() { // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        s.src = 'https://pyony.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+</body>
+</html>
