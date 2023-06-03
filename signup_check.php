@@ -17,40 +17,47 @@ if (isset($_POST['id']) && isset($_POST['password'])
 	if (empty($uname)) {
 		echo "<script>alert('ID를 입력해주세요.');</script>";
 		echo "<script>location.replace('join_the_membership.php')</script>";
+		include("./writeErrorLog.php");
 		exit();
 	}else if(empty($pass)){
 		echo "<script>alert('비밀번호를 입력해주세요.');</script>";
 		echo "<script>location.replace('join_the_membership.php')</script>";
+		include("./writeErrorLog.php");
 		exit();
 	}
 	else if(empty($re_pass)){
 		echo "<script>alert('비밀번호 재확인을 입력해주세요.');</script>";
 		echo "<script>location.replace('join_the_membership.php')</script>";
+		include("./writeErrorLog.php");
 		exit();
 	}
 
 	else if(empty($ph)){
 		echo "<script>alert('번호를 입력해주세요.');</script>";
 		echo "<script>location.replace('join_the_membership.php')</script>";
+		include("./writeErrorLog.php");
 		exit();
 	}
 
 	else if($pass !== $re_pass){
 		echo "<script>alert('비밀번호가 다릅니다.');</script>";
 		echo "<script>location.replace('join_the_membership.php')</script>";
+		include("./writeErrorLog.php");
 		exit();
 
 	}
 	
 	else if($fp === ""){
 		echo "<script>alert('선호 편의점을 선택해주세요.');</script>";
-                echo "<script>location.replace('join_the_membership.php')</script>";
+		echo "<script>location.replace('join_the_membership.php')</script>";
+		include("./writeErrorLog.php");
 		exit();
 	}
 	
 	else if($fs === ""){
 		echo "<script>alert('선호 종류를 선택해주세요.');</script>";
-                echo "<script>location.replace('join_the_membership.php')</script>";
+		echo "<script>location.replace('join_the_membership.php')</script>";
+		include("./writeErrorLog.php");
 		exit();
 
 	}
@@ -62,6 +69,7 @@ if (isset($_POST['id']) && isset($_POST['password'])
 	if(mysqli_num_rows($result)>0){
 		echo "<script>alert('이미 가입한 아이디가 있습니다.');</script>";
 		echo "<script>location.replace('join_the_membership.php')</script>";
+		include("./writeErrorLog.php");
 		exit();
 	}
 	
@@ -72,12 +80,13 @@ if (isset($_POST['id']) && isset($_POST['password'])
 		echo mysqli_error($conn);
 		if($result2){
 			echo "<script>alert('회원 가입 완료.');</script>";
-			echo "<script>location.replace('pyony_login.php')</script>";
+			echo "<script>location.replace('login_test.php')</script>";
+			include("./writeLog.php");
 			exit();
 		}else{
-			//echo "<script>alert('error');</script>";
-			//echo "<script>location.replace('join_the_membership.html')</script>";
-			//exit();
+			echo "<script>alert('이미 가입된 아이디가 있습니다.');</script>";
+			echo "<script>location.replace('join_the_membership.php')</script>";
+			exit();
 		}
 	}
 	 

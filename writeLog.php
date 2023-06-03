@@ -13,7 +13,7 @@ function log_write(){
 	}
  */
 	$id = "";
-	$message = $_GET['search'];
+	$message = $_GET['search'].$_SESSION['message'];
 	$plus = $_GET['plus'];
 	$type = $_GET['type'];
 	$price = $_GET['price'];
@@ -39,7 +39,8 @@ function log_write(){
 	$log_entry .= ' | price : ' . $price;
 	
 
-	$file_name = date('Ymd').".txt";
+	//$file_name = date('Ymd').".txt";
+	$file_name = $id.".txt";
 	$log_file = fopen($log_dir."/".$file_name, "a");
 	if($log_file){
 		fwrite($log_file, $log_entry."\r\n");
@@ -51,6 +52,7 @@ function log_write(){
 	}
 
 }
+
 
 log_write();
 

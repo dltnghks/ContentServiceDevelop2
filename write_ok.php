@@ -31,6 +31,9 @@ mysqli_close( $conn );
 ?>
 
 <?php
+$_SESSION['message'] = $product_id."||".$comment_content;
+include("./writeLog.php");
+$_SESSION['message'] = "";
 $prevPage = $_SERVER['HTTP_REFERER'];
 header('location:'.$prevPage);
 ?>

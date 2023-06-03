@@ -24,7 +24,7 @@ session_start();
             <h3 class = "header_element" onClick = "location.href='Emart24_search.php'" id = "emart24"onmouseover="this.style.cursor='pointer'" >emart24</h3>
 	</div>
 			<?php if($_SESSION['id'] === NULL && $_SESSION['password'] === NULL){ ?>
-		<button class = "button_login" onClick = "location.href ='pyony_login.html'">로그인</button>
+		<button class = "button_login" onClick = "location.href ='login_test.php'">로그인</button>
 	<?php }else {
 	$isLogin = true;
 	$id = $_SESSION['id'];

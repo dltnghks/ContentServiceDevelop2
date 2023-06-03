@@ -8,7 +8,7 @@ session_start();
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>CU 상품 모음</title>
+	<title>전체 상품 모음</title>
 	<link rel="stylesheet" href="pyonystyle.css">
 </head>
 <body>
@@ -21,7 +21,7 @@ session_start();
             <h3 class = "header_element" onClick = "location.href='Ministop_search.php'" id = "MINISTOP"onmouseover="this.style.cursor='pointer'" >MINISTOP</h3>
             <h3 class = "header_element" onClick = "location.href='Emart24_search.php'" id = "emart24"onmouseover="this.style.cursor='pointer'" >emart24</h3>
 	</div>
-		<?php if($_SESSION['id'] === NULL && $_SESSION['password'] === NULL){ ?>
+			<?php if($_SESSION['id'] === NULL && $_SESSION['password'] === NULL){ ?>
 		<button class = "button_login" onClick = "location.href ='login_test.php'">로그인</button>
 	<?php }else {
 	$isLogin = true;
@@ -34,11 +34,10 @@ session_start();
 	<?php } ?>
 	</div>
 
-
 	<h1>편   띵</h1>
 
 	<div class = "input-group">
-		<form action = "CU_search.php" method = "get">
+		<form action = "Main_search.php" method = "get">
 			<input type = "text" name = "search" placeholder="상품명 검색" class = "search">
 			<button id = "submit"onmouseover="this.style.cursor='pointer'" >검색</button><br>
 			<select name = "plus">
@@ -68,13 +67,14 @@ session_start();
 		$plus = $_GET['plus'];
 		$type = $_GET['type'];
 		$price = $_GET['price'];
-		$convenience = "CU";
+
+		$_SESSION['search'] = $search;
 
 		include("./SQLconstants.php");
 		$conn = mysqli_connect($mySQL_host,$mySQL_id,$mySQL_password,$mySQL_database) or die ("Can't access DB");
 
 	// MySQL 검색 실행 및 결과 출력
-		$query = "select distinct sale_product.convenience, product.name, product.price, sale_product.event_type, sale_product.event_info, product.image, product.id, product.type FROM sale_product, product where sale_product.id = product.id AND product.name like '%".$search."%' AND sale_product.event_type LIKE '%".$plus."%' AND product.type LIKE '%".$type."%' AND sale_product.convenience = 'CU' order by CONVERT(product.price, signed) ".$price.";";
+		$query = "select distinct sale_product.convenience, product.name, product.price,  sale_product.event_type, sale_product.event_info, product.image, product.id, product.type FROM sale_product, product where sale_product.id = product.id AND product.name like '%".$search."%' AND sale_product.event_type LIKE '%".$plus."%' AND product.type LIKE '%".$type."%' order by CONVERT(product.price, signed) ".$price.";";
 
 		//$query2 = "select count(*) from (select distinct sale_product.convenience, product.name, product.price, sale_product.event_type, sale_product.event_info, product.image, product.id, product.type FROM sale_product, product where sale_product.id = product.id AND product.name like '%".$search."%') as A";
 
@@ -89,16 +89,32 @@ session_start();
 			$count= 0;
 		?>
 
-		<br><br><div class = "GS_gather">
-			<?php
-				do {
-					$count = $count + 1;
-			?>
-			<div class = "menu_gs">
-				<small class ="cu_pn_name"><?php echo $row["convenience"]; ?>
-				<span class = "Product_name"><?php echo $row["type"]; ?></span>
-			</small>
-			<div class = "menu_gs2">
+		<br><br>
+		<div class = "CU_gather">
+        <?php
+                do{
+                        $count = $count + 1;
+                        $name = $row['convenience'];
+                        $pnname = "";
+                        if($name === 'CU'){
+                                $pnname = 'cu_pn_name';
+                        }else if($name === 'GS25'){
+                                $pnname = 'gs_pn_name';
+                        }else if($name === '7-ELEVEn'){
+                                $pnname = 'seleven_pn_name';
+                        }else if($name === 'MINISTOP'){
+                                $pnname = 'ministop_pn_name';
+                        }else if($name === 'emart24'){
+                                $pnname = 'emart24_pn_name';
+                        }
+?>
+
+                        <div class = "menu_cu">
+                                <small class = <?php echo $pnname; ?>> <?php echo $row['convenience'] ?>
+                                        <span class = "Product_name"><?php echo $row['type'] ?> </span>
+                                </small>
+
+                        <div class = "menu_cu2">
 			<div class ="pn_img"> <a href="product_information.php?id=<?php echo $row['id']; ?>">
                         <img src="<?php echo $row['image']; ?>" class = image_size>
                         </a>

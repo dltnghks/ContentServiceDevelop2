@@ -1,3 +1,8 @@
+<?php
+	session_start();
+	$_SESSION['prevPage'] = $_SERVER['HTTP_REFERER'];
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,3 +43,7 @@
     
 </body>
 </html>
+
+<?php
+include("./writeLog.php");
+?>

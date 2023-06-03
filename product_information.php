@@ -1,8 +1,6 @@
 <?php
 
 session_start();
-error_reporting( E_ALL );
-ini_set( "display_errors", 1 );
 include("./SQLconstants.php");
 $conn = mysqli_connect($mySQL_host, $mySQL_id, $mySQL_password, $mySQL_database) or die ("Cant't access DB");
 
@@ -55,20 +53,19 @@ $row = mysqli_fetch_assoc($result2);
 <div class = "header">
     <h2 id = "small_title" onClick = "location.href='pyony.php'">편띵</h2>
     <div class = "pyony_gather">
-     <h3 class = "header_element" onClick = "location.href='CU_search.php'" id = "CU"onmouseover="this.style.cursor='pointer'">CU</h3>
-     <h3 class = "header_element" onClick = "location.href='GS_search.php'" id = "GS25" onmouseover="this.style.cursor='pointer'">GS25</h3>
-     <h3 class = "header_element" onClick = "location.href='Seven_search.php'" id = "seven-ELEVEn"onmouseover="this.style.cursor='pointer'" >7-ELEVEn</h3>
-     <h3 class = "header_element" onClick = "location.href='Ministop_search.php'" id = "MINISTOP" onmouseover="this.style.cursor='pointer'">MINISTOP</h3>
-     <h3 class = "header_element" onClick = "location.href='Emart24_search.php'" id = "emart24"onmouseover="this.style.cursor='pointer'" >emart24</h3>
- </div>
- <?php
+       <h3 class = "header_element" onClick = "location.href='CU_search.php'" id = "CU"onmouseover="this.style.cursor='pointer'">CU</h3>
+       <h3 class = "header_element" onClick = "location.href='GS_search.php'" id = "GS25" onmouseover="this.style.cursor='pointer'">GS25</h3>
+       <h3 class = "header_element" onClick = "location.href='Seven_search.php'" id = "seven-ELEVEn"onmouseover="this.style.cursor='pointer'" >7-ELEVEn</h3>
+       <h3 class = "header_element" onClick = "location.href='Ministop_search.php'" id = "MINISTOP" onmouseover="this.style.cursor='pointer'">MINISTOP</h3>
+       <h3 class = "header_element" onClick = "location.href='Emart24_search.php'" id = "emart24"onmouseover="this.style.cursor='pointer'" >emart24</h3>
+   </div>
+   <?php
 
- if($isLogin === false){
+   if($isLogin === false){
     ?>
     <button class = "button_login" onClick = "location.href ='login_test.php'">로그인</button>
     <?php
 }else{
-  $isLogin = false;
   ?>	
   <form action = "logout.php" method="post">
     <button class = "button_login">로그아웃</button>
@@ -93,50 +90,63 @@ $row = mysqli_fetch_assoc($result2);
               $pnname = "";
 
               if($name === 'CU'){
-                 $pnname = 'cu_pn_name';
-             }else if($name === 'GS25'){
-                $pnname = 'gs_pn_name';
+               $pnname = 'cu_pn_name';
+           }else if($name === 'GS25'){
+            $pnname = 'gs_pn_name';
 
-            }else if($name === '7-ELEVEn'){
-                $pnname = 'seleven_pn_name';
+        }else if($name === '7-ELEVEn'){
+            $pnname = 'seleven_pn_name';
 
-            }else if($name === 'MINISTOP'){
-                $pnname = 'ministop_pn_name';
+        }else if($name === 'MINISTOP'){
+            $pnname = 'ministop_pn_name';
 
-            }else if($name === 'emart24'){
-                $pnname = 'emart24_pn_name';
-            }
-            ?>
+        }else if($name === 'emart24'){
+            $pnname = 'emart24_pn_name';
+        }
+        ?>
 
-            <div class = "menu_cu">
-                <small class = <?php echo $pnname; ?>> <?php echo $row['convenience'] ?>
-                <span class = "Product_name"><?php echo $row['type'] ?> </span>
-            </small>
+        <div class = "menu_cu">
+            <small class = <?php echo $pnname; ?>> <?php echo $row['convenience'] ?>
+            <span class = "Product_name"><?php echo $row['type'] ?> </span>
+        </small>
 
-                <div class = "menu_cu2">
-                    <div class ="pn_img"><img src="<?php echo $row['image']; ?>" height='290' width='295'>
-                        <?php   echo "<BR>이름 : ".$row['name']."<br>";
-                        echo "<BR>가격 : ".$row['price']."<br>";
-                        echo "<BR>행사정보 : ".$row['event_type']."<br><br>"; ?>
-                    </div>
-                </div>
-            </div>
+        <div class = "menu_cu2">
+            <div class ="pn_img"><img src="<?php echo $row['image']; ?>" height='290' width='295'>
+                <?php   echo "<BR>이름 : ".$row['name']."<br>";
+                echo "<BR>가격 : ".$row['price']."<br>";
+                echo "<BR>행사정보 : ".$row['event_type']."<br><br>"; ?>
             </div>
         </div>
-<div class = "comment_write">
-    <form action = "write_ok.php", method = "post">
-        <input type = "text" name = "comment_content"  class ="write" placeholder = "댓글을 입력해주세요." SIZE = "100">
-        <button id = "submit">작성</button><br>
-    </form>
+    </div>
+</div>
 </div>
 
 <?php 
-$comment = "select comment.member_id, comment.comment_content, comment.date from comment where comment.product_id like ".$id.";";
+$comment = "select comment.comment_id, comment.member_id, comment.comment_content, comment.date from comment where comment.product_id like ".$id." order by CONVERT(comment.comment_id, signed) DESC;";
 $commentResult = mysqli_query($conn, $comment);
 ?>
 
 <div class = "comment">
     <h2>댓글</h2>
+    <div class = "comment_write">
+        <?php
+
+        if ($isLogin === false)
+        {
+         echo "<form style = 'text-align:center;'>";
+                echo "<input type = 'text' class ='write' placeholder = '로그인 후 입력 가능합니다' maxlength=30 disabled style = 'text-align :center;'>";
+            echo "</form>";
+        }
+        else
+        {
+        echo "<form style = 'text-align:center;' action = 'write_ok.php', method = 'post'>";
+            echo "<input type = 'text' name = 'comment_content'  class ='write' placeholder = '댓글을 입력해주세요.' maxlength=30 required = requried style = 'text-align :center;'>";
+            echo "<button id = 'submit'>작성</button><br>";
+        echo "</form>";
+        }
+
+        ?>
+    </div>
     <div class = "User_comment_gather">
         <?php
         while($commentRow = mysqli_fetch_array($commentResult))
@@ -144,19 +154,28 @@ $commentResult = mysqli_query($conn, $comment);
             ?>
             <div class = "user_comment">
                 <div class = "user">
-                    <small class="comment_pn_name"><?php echo $row["convenience"]?>
-                    <span class = "name_date">
+                    <small class="comment_pn_name" style="text-align: left;">
+                    <span >
                         <?php 
                         echo $commentRow["member_id"];
-                        echo "/";
-                        echo $commentRow["date"];?>
+                        ?>
                     </span>
-                </small>
-            </div>
+                    </small>
+                    <small class="comment_pn_name" style="text-align: right;">
+                    <span>
+                        <?php echo $commentRow["date"];?>
+                    </span>
+                    </small>
+                </div>
             <div class = "comment_detail"><?php echo $commentRow["comment_content"]?></div>
         </div>
     <?php }?>
 </div>
 </div>
+<script>
+    function btn() {
+        alert("로그인 후 작성 가능합니다")
+    }
+</script>
 </body>
 </html>
